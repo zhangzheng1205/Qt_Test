@@ -27,6 +27,7 @@ void MainWindow::on_save_path_clicked()
     }
     else
     {
+        qDebug()<<filename;
 //        if(! ( img2->save(filename) ) ) //保存图像
 //        {
 //            QMessageBox::information(this,

@@ -8,8 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-//    ui->test->setAutoRepeat(true);
+    btn=NULL;
+    ui->test->setAutoRepeat(true);
+    ui->test->setAutoRepeatInterval(200);
 
     connect(this,SIGNAL(signal_control()),SLOT(test()));
 }
@@ -22,34 +23,37 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_test_pressed()
 {
-    i=true;
-    emit signal_control();
-//    qDebug()<<ui->test->isDown();
+//    btn=qobject_cast<QPushButton*>(sender());
+    if(btn_pressed)
+    {
+        qDebug()<<tem;
+        tem++;
+    }
 }
 
 void MainWindow::on_test_released()
 {
-    qDebug()<<"call release";
-//    qDebug()<<ui->test->isDown();
-    i=false;
+
 }
 
 void MainWindow::test()
 {
-//    int x=0;
-//    while(i)
+}
+
+void MainWindow::mousePressEvent(QMouseEvent* event)
+{
+    //press the button and mouse at the same time,so this method is no use
+//    if(btn!=NULL)
 //    {
-//        if(ui->test->isDown())
-//        {
-//            qDebug()<<i;
-//            qDebug()<<x;
-//            x++;
-//            Sleep(500);
-//        }
+//        qDebug()<<btn->objectName();
 //    }
-    while(ui->test->isDown())
-    {
-        qDebug()<<"??";
-        Sleep(1000);
-    }
+    btn_pressed=true;
+    event->accept();
+    qDebug()<<btn_pressed;
+}
+void MainWindow::mouseReleaseEvent(QMouseEvent* event)
+{
+    btn_pressed=false;
+    event->accept();
+    qDebug()<<btn_pressed;
 }

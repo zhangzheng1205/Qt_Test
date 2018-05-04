@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QEventLoop>
+#include <QList>
+#include <QMouseEvent>
+#include <QPushButton>
 
 namespace Ui {
 class MainWindow;
@@ -15,7 +19,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void mousePressEvent(QMouseEvent*);
+    void mouseReleaseEvent(QMouseEvent*);
+
     bool i=false;
+    QPushButton *btn;
+    volatile bool btn_pressed=false;
+    int tem=0;
 
 signals:
     void signal_control();
